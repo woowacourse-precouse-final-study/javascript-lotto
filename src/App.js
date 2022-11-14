@@ -3,15 +3,13 @@ const Lotto = require('./Lotto');
 
 class App {
 	#payment;
+	#lottos;
 
 	play() {
 		this.getPayment();
 	}
 
-	playRest(lotto_cnt) {
-		const lottos = this.generateLottos(lotto_cnt);
-		lottos.map(loto => Console.print(loto));
-
+	playRest() {
 		Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbers => {
 			const winning_number = this.validateWinningNumber(numbers);
 
@@ -19,7 +17,7 @@ class App {
 				const bonus_number = this.validateBonusNumber(number, winning_number);
 				const answerCountArr = [];
 
-				lottos.map(lotto => {
+				this.#lottos.map(lotto => {
 					const answerCnt = this.countAnswers(lotto, winning_number, bonus_number);
 					answerCountArr.push(answerCnt);
 				});
@@ -44,9 +42,9 @@ class App {
 
 	printPurchaseQuantity() {
 		const quantity = this.#payment / 1000;
-		Console.print(`\n${quantity}개를 구매했습니다.\n`);
+		Console.print(`\n${quantity}개를 구매했습니다.`);
 
-		this.playRest(quantity);
+		this.generateLottos(quantity);
 	}
 
 	validateAmount(money) {
@@ -106,10 +104,13 @@ class App {
 				const random_number = Random.pickUniqueNumbersInRange(1, 45, 6);
 				const sorted_random_number = random_number.sort((a, b) => a - b);
 				const lotto = new Lotto(sorted_random_number);
-				lottos.push(lotto.numbers);
+				Console.print(lotto.numbers);
+				lottos.push(lotto);
 			});
 
-		return lottos;
+		this.#lottos = lottos;
+
+		this.playRest();
 	}
 
 	countAnswers(lotto, winning, bonus) {
