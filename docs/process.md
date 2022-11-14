@@ -23,8 +23,8 @@
     - result
   - method
     - 번호 유효성 체크 : validate(numbers)
-    - 번호 출력 : print(numbers)
-    - 당첨내역 확인 : checkResult(numbers, winning)
+    - ✅ 번호 출력 : get(numbers)
+    - ✅ 당첨내역 확인 : checkResult(numbers, winning)
 
 - constants
   - 에러 메세지

@@ -12,12 +12,7 @@ class App {
 	}
 
 	playRest() {
-		const answerCountArr = [];
-
-		this.#lottos.map(lotto => {
-			const answerCnt = this.countAnswers(lotto, this.#winning_number, this.#bonus_number);
-			answerCountArr.push(answerCnt);
-		});
+		const answerCountArr = this.#lottos.map(lotto => lotto.checkResult(this.#winning_number, this.#bonus_number))
 
 		const result = this.generateAnswer(answerCountArr);
 		this.printResult(result);
@@ -99,7 +94,7 @@ class App {
 				const random_number = Random.pickUniqueNumbersInRange(1, 45, 6);
 				const sorted_random_number = random_number.sort((a, b) => a - b);
 				const lotto = new Lotto(sorted_random_number);
-				Console.print(lotto.numbers);
+					Console.print(lotto.numbers);
 				lottos.push(lotto);
 			});
 
@@ -120,23 +115,6 @@ class App {
 			this.#bonus_number = this.validateBonusNumber(number);
 			this.playRest();
 		});
-	}
-
-	countAnswers(lotto, winning, bonus) {
-		let cnt = 0;
-		let isBonus = false;
-
-		lotto.numbers.map(num => {
-			if (winning.includes(num)) {
-				cnt += 1;
-			}
-		});
-
-		if (cnt === 5 && lotto.includes(bonus)) {
-			isBonus = true;
-		}
-
-		return isBonus ? 'bonus' : cnt;
 	}
 
 	generateAnswer(arr) {
