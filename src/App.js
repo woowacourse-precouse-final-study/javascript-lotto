@@ -5,8 +5,12 @@ class App {
 	play() {
 		Console.readLine('구입금액을 입력해 주세요.\n', received_money => {
 			this.validateAmount(+received_money);
+      
+			const lotto_cnt = received_money / 1000;
+			Console.print(`\n${lotto_cnt}개를 구매했습니다.\n`);
 		});
 	}
+
 	validateAmount(money) {
 		if (typeof money !== 'number' || isNaN(money)) {
 			throw Error('[ERROR] 유효한 숫자를 입력해주세요.');
