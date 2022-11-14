@@ -5,27 +5,25 @@ class App {
 	#payment;
 	#lottos;
 	#winning_number;
+	#bonus_number;
 
 	play() {
 		this.getPayment();
 	}
 
 	playRest() {
-		Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
-			const bonus_number = this.validateBonusNumber(number, this.#winning_number);
-			const answerCountArr = [];
+		const answerCountArr = [];
 
-			this.#lottos.map(lotto => {
-				const answerCnt = this.countAnswers(lotto, this.#winning_number, bonus_number);
-				answerCountArr.push(answerCnt);
-			});
-
-			const result = this.generateAnswer(answerCountArr);
-			this.printResult(result);
-
-			this.printProfit(result, this.#payment);
-			Console.close();
+		this.#lottos.map(lotto => {
+			const answerCnt = this.countAnswers(lotto, this.#winning_number, this.#bonus_number);
+			answerCountArr.push(answerCnt);
 		});
+
+		const result = this.generateAnswer(answerCountArr);
+		this.printResult(result);
+
+		this.printProfit(result, this.#payment);
+		Console.close();
 	}
 
 	getPayment() {
@@ -77,7 +75,7 @@ class App {
 		return numberList;
 	}
 
-	validateBonusNumber(number, winning) {
+	validateBonusNumber(number) {
 		if (typeof +number !== 'number' || isNaN(+number)) {
 			throw Error('[ERROR] 숫자를 입력해주세요.');
 		}
@@ -85,7 +83,7 @@ class App {
 			throw Error('[ERROR] 1부터 45 사이의 번호를 입력해주세요.');
 		}
 
-		if (winning.includes(number)) {
+		if (this.#winning_number.includes(number)) {
 			throw Error('[ERROR] 당첨번호 6개에 없는 숫자를 입력해주세요.');
 		}
 
@@ -113,7 +111,14 @@ class App {
 	getWinningNumber() {
 		Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbers => {
 			this.#winning_number = this.validateWinningNumber(numbers);
-			this.playRest()
+			this.getBonusNumber();
+		});
+	}
+
+	getBonusNumber() {
+		Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
+			this.#bonus_number = this.validateBonusNumber(number);
+			this.playRest();
 		});
 	}
 
@@ -121,7 +126,7 @@ class App {
 		let cnt = 0;
 		let isBonus = false;
 
-		lotto.map(num => {
+		lotto.numbers.map(num => {
 			if (winning.includes(num)) {
 				cnt += 1;
 			}
