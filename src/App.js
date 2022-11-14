@@ -37,7 +37,7 @@ class App {
 				const random_number = Random.pickUniqueNumbersInRange(1, 45, 6);
 				const sorted_random_number = random_number.sort((a, b) => a - b);
 				const lotto = new Lotto(sorted_random_number);
-				Console.print(lotto.numbers);
+				Console.print(`[${lotto.numbers.join(', ')}]`);
 				lottos.push(lotto);
 			});
 
