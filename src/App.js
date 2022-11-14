@@ -26,6 +26,8 @@ class App {
 
 					const result = this.generateAnswer(answerCountArr);
 					this.printResult(result);
+
+					this.printProfit(result, received_money);
 				});
 			});
 		});
@@ -143,6 +145,19 @@ class App {
     `;
 
 		Console.print(resultMessage);
+	}
+
+	printProfit(result, money) {
+		const prize = [5000, 50000, 1500000, 3000000, 2000000000];
+		let totalPrize = 0;
+
+		for (let i = 0; i < result.length; i++) {
+			totalPrize += result[i] * prize[i];
+		}
+
+		const profit = ((totalPrize / money) * 100).toFixed(1);
+
+		Console.print(`총 수익률은 ${profit}%입니다.`);
 	}
 }
 
