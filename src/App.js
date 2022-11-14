@@ -4,30 +4,27 @@ const Lotto = require('./Lotto');
 class App {
 	#payment;
 	#lottos;
+	#winning_number;
 
 	play() {
 		this.getPayment();
 	}
 
 	playRest() {
-		Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbers => {
-			const winning_number = this.validateWinningNumber(numbers);
+		Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
+			const bonus_number = this.validateBonusNumber(number, this.#winning_number);
+			const answerCountArr = [];
 
-			Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
-				const bonus_number = this.validateBonusNumber(number, winning_number);
-				const answerCountArr = [];
-
-				this.#lottos.map(lotto => {
-					const answerCnt = this.countAnswers(lotto, winning_number, bonus_number);
-					answerCountArr.push(answerCnt);
-				});
-
-				const result = this.generateAnswer(answerCountArr);
-				this.printResult(result);
-
-				this.printProfit(result, this.#payment);
-				Console.close();
+			this.#lottos.map(lotto => {
+				const answerCnt = this.countAnswers(lotto, this.#winning_number, bonus_number);
+				answerCountArr.push(answerCnt);
 			});
+
+			const result = this.generateAnswer(answerCountArr);
+			this.printResult(result);
+
+			this.printProfit(result, this.#payment);
+			Console.close();
 		});
 	}
 
@@ -110,7 +107,14 @@ class App {
 
 		this.#lottos = lottos;
 
-		this.playRest();
+		this.getWinningNumber();
+	}
+
+	getWinningNumber() {
+		Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbers => {
+			this.#winning_number = this.validateWinningNumber(numbers);
+			this.playRest()
+		});
 	}
 
 	countAnswers(lotto, winning, bonus) {
