@@ -10,7 +10,12 @@ class App {
 			Console.print(`\n${lotto_cnt}개를 구매했습니다.\n`);
 
 			const lottos = this.generateLottos(lotto_cnt);
-      lottos.map(loto => Console.print(loto));
+			lottos.map(loto => Console.print(loto));
+
+			Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbers => {
+				const winning_number = this.validateWinningNumber(numbers);
+				console.log(winning_number);
+			});
 		});
 	}
 
@@ -24,6 +29,27 @@ class App {
 		if (money % 1000 !== 0) {
 			throw Error('[ERROR] 1000원 단위로 금액을 입력해주세요.');
 		}
+	}
+
+	validateWinningNumber(numbers) {
+		if (numbers.split(',').length !== 6) {
+			throw Error('[ERROR] , 로 구분 6개의 숫자를 입력해주세요.');
+		}
+		const numberList = numbers.split(',').map(str => +str);
+
+		numberList.map((number, idx) => {
+			if (typeof number !== 'number') {
+				throw Error('[ERROR] 숫자를 입력해주세요.');
+			}
+			if (number < 1 && number > 45) {
+				throw Error('[ERROR] 1부터 45 사이의 번호를 입력해주세요.');
+			}
+			if (numberList.slice(idx + 1).includes(number)) {
+				throw Error('[ERROR] 중복된 숫자가 있습니다.');
+			}
+		});
+
+		return numberList;
 	}
 
 	generateLottos(cnt) {
