@@ -28,6 +28,7 @@ class App {
 					this.printResult(result);
 
 					this.printProfit(result, received_money);
+					Console.close();
 				});
 			});
 		});
