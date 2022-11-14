@@ -12,8 +12,7 @@ class App {
 		this.getPayment();
 	}
 
-	playRest() {
-		this.printProfit(this.#result, this.#payment);
+	close() {
 		Console.close();
 	}
 
@@ -149,20 +148,21 @@ class App {
 
 		Console.print(resultMessage);
 
-		this.playRest();
+		this.printProfitRate();
 	}
 
-	printProfit(result, money) {
+	printProfitRate() {
 		const prize = [5000, 50000, 1500000, 3000000, 2000000000];
 		let totalPrize = 0;
 
-		for (let i = 0; i < result.length; i++) {
-			totalPrize += result[i] * prize[i];
+		for (let i = 0; i < this.#result.length; i++) {
+			totalPrize += this.#result[i] * prize[i];
 		}
 
-		const profit = ((totalPrize / money) * 100).toFixed(1);
+		const profit = ((totalPrize / this.#payment) * 100).toFixed(1);
 
 		Console.print(`총 수익률은 ${profit}%입니다.`);
+		this.close();
 	}
 }
 

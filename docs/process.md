@@ -9,14 +9,16 @@
     - ✅ 당첨결과 : result
     - 수익률 : profit_rate
   - method
+    - ✅ 시작 : play
     - ✅ 금액 입력받기 : getPayment
     - ✅ 로또 구매개수 출력 : printPurchaseQuantity
     - ✅ 로또 발행 : generateLottos
     - ✅ 당첨번호 입력받기 : getWinningNumeber
     - ✅ 보너스번호 입력받기 : getBonusNumber
     - ✅ 당첨결과 도출 : generateResult
-    - 당첨결과 출력 : printResult
-    - 수익률 출력 : printProfitRate
+    - ✅ 당첨결과 출력 : printResult
+    - ✅ 수익률 출력 : printProfitRate
+    - ✅ 종료 : close
 
 - Lotto 
   - state : 
