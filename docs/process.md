@@ -6,7 +6,7 @@
     - ✅ 로또번호들 : lottos
     - ✅ 당첨번호 : winning_number
     - ✅ 보너스번호 : bonus_number
-    - 당첨결과 : result
+    - ✅ 당첨결과 : result
     - 수익률 : profit_rate
   - method
     - ✅ 금액 입력받기 : getPayment
@@ -14,6 +14,7 @@
     - ✅ 로또 발행 : generateLottos
     - ✅ 당첨번호 입력받기 : getWinningNumeber
     - ✅ 보너스번호 입력받기 : getBonusNumber
+    - ✅ 당첨결과 도출 : generateResult
     - 당첨결과 출력 : printResult
     - 수익률 출력 : printProfitRate
 

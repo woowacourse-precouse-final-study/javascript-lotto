@@ -6,18 +6,14 @@ class App {
 	#lottos;
 	#winning_number;
 	#bonus_number;
+	#result;
 
 	play() {
 		this.getPayment();
 	}
 
 	playRest() {
-		const answerCountArr = this.#lottos.map(lotto => lotto.checkResult(this.#winning_number, this.#bonus_number))
-
-		const result = this.generateAnswer(answerCountArr);
-		this.printResult(result);
-
-		this.printProfit(result, this.#payment);
+		this.printProfit(this.#result, this.#payment);
 		Console.close();
 	}
 
@@ -94,7 +90,7 @@ class App {
 				const random_number = Random.pickUniqueNumbersInRange(1, 45, 6);
 				const sorted_random_number = random_number.sort((a, b) => a - b);
 				const lotto = new Lotto(sorted_random_number);
-					Console.print(lotto.numbers);
+				Console.print(lotto.numbers);
 				lottos.push(lotto);
 			});
 
@@ -113,14 +109,15 @@ class App {
 	getBonusNumber() {
 		Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
 			this.#bonus_number = this.validateBonusNumber(number);
-			this.playRest();
+			this.generateResult();
 		});
 	}
 
-	generateAnswer(arr) {
+	generateResult() {
+		const answerCountArr = this.#lottos.map(lotto => lotto.checkResult(this.#winning_number, this.#bonus_number));
 		const result = [0, 0, 0, 0, 0];
 
-		arr.map(cnt => {
+		answerCountArr.map(cnt => {
 			switch (cnt) {
 				case 3:
 					result[0] += 1;
@@ -140,15 +137,19 @@ class App {
 			}
 		});
 
-		return result;
+		this.#result = result;
+
+		this.printResult();
 	}
 
-	printResult(result) {
-		const [place5, place4, place3, place2, place1] = result;
+	printResult() {
+		const [place5, place4, place3, place2, place1] = this.#result;
 		const resultMessage = `3개 일치 (5,000원) - ${place5}개\n4개 일치 (50,000원) - ${place4}개\n5개 일치 (1,500,000원) - ${place3}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${place2}개\n6개 일치 (2,000,000,000원) - ${place1}개
     `;
 
 		Console.print(resultMessage);
+
+		this.playRest();
 	}
 
 	printProfit(result, money) {
