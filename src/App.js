@@ -23,6 +23,9 @@ class App {
 						const answerCnt = this.countAnswers(lotto, winning_number, bonus_number);
 						answerCountArr.push(answerCnt);
 					});
+
+					const result = this.generateAnswer(answerCountArr);
+					this.printResult(result);
 				});
 			});
 		});
@@ -106,6 +109,40 @@ class App {
 		}
 
 		return isBonus ? 'bonus' : cnt;
+	}
+
+	generateAnswer(arr) {
+		const result = [0, 0, 0, 0, 0];
+
+		arr.map(cnt => {
+			switch (cnt) {
+				case 3:
+					result[0] += 1;
+					break;
+				case 4:
+					result[1] += 1;
+					break;
+				case 5:
+					result[2] += 1;
+					break;
+				case 'bonus':
+					result[3] += 1;
+					break;
+				case 6:
+					result[4] += 1;
+					break;
+			}
+		});
+
+		return result;
+	}
+
+	printResult(result) {
+		const [place5, place4, place3, place2, place1] = result;
+		const resultMessage = `3개 일치 (5,000원) - ${place5}개\n4개 일치 (50,000원) - ${place4}개\n5개 일치 (1,500,000원) - ${place3}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${place2}개\n6개 일치 (2,000,000,000원) - ${place1}개
+    `;
+
+		Console.print(resultMessage);
 	}
 }
 
