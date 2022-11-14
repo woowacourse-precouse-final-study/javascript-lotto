@@ -17,6 +17,12 @@ class App {
 
 				Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
 					const bonus_number = this.validateBonusNumber(number, winning_number);
+					const answerCountArr = [];
+
+					lottos.map(lotto => {
+						const answerCnt = this.countAnswers(lotto, winning_number, bonus_number);
+						answerCountArr.push(answerCnt);
+					});
 				});
 			});
 		});
@@ -83,6 +89,23 @@ class App {
 			});
 
 		return lottos;
+	}
+
+	countAnswers(lotto, winning, bonus) {
+		let cnt = 0;
+		let isBonus = false;
+
+		lotto.map(num => {
+			if (winning.includes(num)) {
+				cnt += 1;
+			}
+		});
+
+		if (cnt === 5 && lotto.includes(bonus)) {
+			isBonus = true;
+		}
+
+		return isBonus ? 'bonus' : cnt;
 	}
 }
 
