@@ -8,10 +8,7 @@ class App {
 		this.getPayment();
 	}
 
-	playRest() {
-		const lotto_cnt = this.#payment / 1000;
-		Console.print(`\n${lotto_cnt}개를 구매했습니다.\n`);
-
+	playRest(lotto_cnt) {
 		const lottos = this.generateLottos(lotto_cnt);
 		lottos.map(loto => Console.print(loto));
 
@@ -40,8 +37,16 @@ class App {
 		Console.readLine('구입금액을 입력해 주세요.\n', received_money => {
 			this.validateAmount(+received_money);
 			this.#payment = received_money;
-			this.playRest();
+
+			this.printPurchaseQuantity();
 		});
+	}
+
+	printPurchaseQuantity() {
+		const quantity = this.#payment / 1000;
+		Console.print(`\n${quantity}개를 구매했습니다.\n`);
+
+		this.playRest(quantity);
 	}
 
 	validateAmount(money) {
