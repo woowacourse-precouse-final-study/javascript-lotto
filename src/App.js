@@ -2,35 +2,45 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 const Lotto = require('./Lotto');
 
 class App {
+	#payment;
+
 	play() {
+		this.getPayment();
+	}
+
+	playRest() {
+		const lotto_cnt = this.#payment / 1000;
+		Console.print(`\n${lotto_cnt}개를 구매했습니다.\n`);
+
+		const lottos = this.generateLottos(lotto_cnt);
+		lottos.map(loto => Console.print(loto));
+
+		Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbers => {
+			const winning_number = this.validateWinningNumber(numbers);
+
+			Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
+				const bonus_number = this.validateBonusNumber(number, winning_number);
+				const answerCountArr = [];
+
+				lottos.map(lotto => {
+					const answerCnt = this.countAnswers(lotto, winning_number, bonus_number);
+					answerCountArr.push(answerCnt);
+				});
+
+				const result = this.generateAnswer(answerCountArr);
+				this.printResult(result);
+
+				this.printProfit(result, this.#payment);
+				Console.close();
+			});
+		});
+	}
+
+	getPayment() {
 		Console.readLine('구입금액을 입력해 주세요.\n', received_money => {
 			this.validateAmount(+received_money);
-
-			const lotto_cnt = received_money / 1000;
-			Console.print(`\n${lotto_cnt}개를 구매했습니다.\n`);
-
-			const lottos = this.generateLottos(lotto_cnt);
-			lottos.map(loto => Console.print(loto));
-
-			Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbers => {
-				const winning_number = this.validateWinningNumber(numbers);
-
-				Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
-					const bonus_number = this.validateBonusNumber(number, winning_number);
-					const answerCountArr = [];
-
-					lottos.map(lotto => {
-						const answerCnt = this.countAnswers(lotto, winning_number, bonus_number);
-						answerCountArr.push(answerCnt);
-					});
-
-					const result = this.generateAnswer(answerCountArr);
-					this.printResult(result);
-
-					this.printProfit(result, received_money);
-					Console.close();
-				});
-			});
+			this.#payment = received_money;
+			this.playRest();
 		});
 	}
 

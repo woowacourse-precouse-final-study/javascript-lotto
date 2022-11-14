@@ -2,14 +2,14 @@
 
 - App
   - state
-    - 구입금액 : payment
+    - ✅ 구입금액 : payment
     - 로또번호들 : lottos
     - 당첨번호 : winning_number
     - 보너스번호 : bonus_number
     - 당첨결과 : result
     - 수익률 : profit_rate
   - method
-    - 금액 입력받기 : getPayment
+    - ✅ 금액 입력받기 : getPayment
     - 로또 발행 : generateLottos
     - 당첨번호 입력받기 : getWinningNumeber
     - 보너스번호 입력받기 : getBonusNumber
