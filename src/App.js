@@ -14,7 +14,10 @@ class App {
 
 			Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbers => {
 				const winning_number = this.validateWinningNumber(numbers);
-				console.log(winning_number);
+
+				Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
+					const bonus_number = this.validateBonusNumber(number, winning_number);
+				});
 			});
 		});
 	}
@@ -50,6 +53,21 @@ class App {
 		});
 
 		return numberList;
+	}
+
+	validateBonusNumber(number, winning) {
+		if (typeof +number !== 'number' || isNaN(+number)) {
+			throw Error('[ERROR] 숫자를 입력해주세요.');
+		}
+		if (number < 1 && number > 45) {
+			throw Error('[ERROR] 1부터 45 사이의 번호를 입력해주세요.');
+		}
+
+		if (winning.includes(number)) {
+			throw Error('[ERROR] 당첨번호 6개에 없는 숫자를 입력해주세요.');
+		}
+
+		return +number;
 	}
 
 	generateLottos(cnt) {
