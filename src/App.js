@@ -1,5 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const Lotto = require('./Lotto');
+const { numberValidation } = require('./utils');
 
 class App {
 	#payment;
@@ -47,8 +48,8 @@ class App {
 	}
 
 	getWinningNumber() {
-		Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbers => {
-			this.#winning_number = this.validateWinningNumber(numbers);
+		Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbersStr => {
+			this.validateWinningNumber(numbersStr);
 			this.getBonusNumber();
 		});
 	}
@@ -129,25 +130,13 @@ class App {
 		}
 	}
 
-	validateWinningNumber(numbers) {
-		if (numbers.split(',').length !== 6) {
-			throw Error('[ERROR] , 로 구분 6개의 숫자를 입력해주세요.');
-		}
-		const numberList = numbers.split(',').map(str => +str);
+	validateWinningNumber(numbersStr) {
+		const numbers = numbersStr.replace(/\s/gi, '').split(',').map(str => numberValidation(str));
 
-		numberList.map((number, idx) => {
-			if (typeof number !== 'number') {
-				throw Error('[ERROR] 숫자를 입력해주세요.');
-			}
-			if (number < 1 && number > 45) {
-				throw Error('[ERROR] 1부터 45 사이의 번호를 입력해주세요.');
-			}
-			if (numberList.slice(idx + 1).includes(number)) {
-				throw Error('[ERROR] 중복된 숫자가 있습니다.');
-			}
-		});
-
-		return numberList;
+		const winning_lotto = new Lotto(numbers);
+		
+		this.#winning_number = winning_lotto.numbers;
+		Console.print(this.#winning_number);
 	}
 
 	validateBonusNumber(number) {
