@@ -1,4 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const { ERROR_MESSAGE } = require('./constants');
 const Lotto = require('./Lotto');
 const { numberValidation } = require('./utils');
 
@@ -121,10 +122,10 @@ class App {
 		const money = numberValidation(moneyStr);
 
 		if (money < 1000) {
-			throw Error('[ERROR] 1000원 이상의 금액을 입력해주세요');
+			throw Error(ERROR_MESSAGE.VALID_PAYMENT.AMOUNT);
 		}
 		if (money % 1000 !== 0) {
-			throw Error('[ERROR] 1000원 단위로 금액을 입력해주세요.');
+			throw Error(ERROR_MESSAGE.VALID_PAYMENT.UNIT);
 		}
 
 		this.#payment = money;
@@ -146,11 +147,11 @@ class App {
 		const number = numberValidation(numberStr);
 
 		if (number < 1 && number > 45) {
-			throw Error('[ERROR] 1부터 45 사이의 번호를 입력해주세요.');
+			throw Error(ERROR_MESSAGE.VALID_LOTTO.RANGE);
 		}
 
 		if (this.#winning_number.includes(number)) {
-			throw Error('[ERROR] 당첨번호 6개에 없는 숫자를 입력해주세요.');
+			throw Error(ERROR_MESSAGE.VALID_BONUS.DUPLICATE);
 		}
 
 		this.#bonus_number = number;

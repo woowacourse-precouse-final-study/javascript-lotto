@@ -1,8 +1,9 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const { ERROR_MESSAGE } = require('./constants');
 
 const numberValidation = stringInput => {
 	if (isNaN(stringInput) || isNaN(parseInt(stringInput))) {
-		throw new Error('[ERROR] 유효한 숫자를 입력해주세요.');
+		throw new Error(ERROR_MESSAGE.VALID_NUMBER);
 	}
 
 	return +stringInput;

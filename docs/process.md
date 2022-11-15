@@ -30,7 +30,7 @@
     - ✅ 당첨내역 확인 : checkResult(numbers, winning)
 
 - constants
-  - 에러 메세지
+  - ✅ 에러 메세지
   - 입력 메세지
 
 
