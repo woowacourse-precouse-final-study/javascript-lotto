@@ -20,8 +20,13 @@ class Lotto {
 		}
 	}
 
+	sortAscending(numbers) {
+		return numbers.sort((a, b) => a - b);
+	}
+
 	get numbers() {
-		return this.#numbers;
+		const sorted = this.sortAscending(this.#numbers);
+		return sorted;
 	}
 
 	checkResult(winning_number, bonus_number) {
