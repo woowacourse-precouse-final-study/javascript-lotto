@@ -14,9 +14,8 @@ class App {
 	}
 
 	getPayment() {
-		Console.readLine('구입금액을 입력해 주세요.\n', received_money => {
-			this.validateAmount(+received_money);
-			this.#payment = received_money;
+		Console.readLine('구입금액을 입력해 주세요.\n', moneyStr => {
+			this.validateAmount(moneyStr);
 
 			this.printPurchaseQuantity();
 		});
@@ -118,20 +117,24 @@ class App {
 		Console.close();
 	}
 
-	validateAmount(money) {
-		if (typeof money !== 'number' || isNaN(money)) {
-			throw Error('[ERROR] 유효한 숫자를 입력해주세요.');
-		}
+	validateAmount(moneyStr) {
+		const money = numberValidation(moneyStr);
+
 		if (money < 1000) {
 			throw Error('[ERROR] 1000원 이상의 금액을 입력해주세요');
 		}
 		if (money % 1000 !== 0) {
 			throw Error('[ERROR] 1000원 단위로 금액을 입력해주세요.');
 		}
+
+		this.#payment = money;
 	}
 
 	validateWinningNumber(numbersStr) {
-		const numbers = numbersStr.replace(/\s/gi, '').split(',').map(str => numberValidation(str));
+		const numbers = numbersStr
+			.replace(/\s/gi, '')
+			.split(',')
+			.map(str => numberValidation(str));
 
 		const winning_lotto = new Lotto(numbers);
 
