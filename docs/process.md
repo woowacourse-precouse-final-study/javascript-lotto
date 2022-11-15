@@ -58,7 +58,7 @@
   - 1000원 단위
 
 - lotto number
-  - 유효한 숫자
+  - 유효한 숫자 
   - 1~ 45 사이 -> lotto / utils
   - 6자리 -> lotto 
   - 중복된 숫자 여부 -> lotto / utils
@@ -73,8 +73,6 @@
   - ✅ 중복된 숫자 여부 -> lotto / utils
 
 - bonus number
-  - 유효한 숫자
-  - 1~ 45 사이
-  - 1자리
-  - winning number과 중복 숫자 여부
-
+  - ✅ 유효한 숫자 (1자리)
+  - ✅ 1~ 45 사이
+  - ✅ winning number과 중복 숫자 여부

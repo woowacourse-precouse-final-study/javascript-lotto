@@ -55,8 +55,8 @@ class App {
 	}
 
 	getBonusNumber() {
-		Console.readLine('\n보너스 번호를 입력해 주세요.\n', number => {
-			this.#bonus_number = this.validateBonusNumber(number);
+		Console.readLine('\n보너스 번호를 입력해 주세요.\n', numberStr => {
+			this.#bonus_number = this.validateBonusNumber(numberStr);
 			this.generateResult();
 		});
 	}
@@ -134,15 +134,14 @@ class App {
 		const numbers = numbersStr.replace(/\s/gi, '').split(',').map(str => numberValidation(str));
 
 		const winning_lotto = new Lotto(numbers);
-		
+
 		this.#winning_number = winning_lotto.numbers;
 		Console.print(this.#winning_number);
 	}
 
-	validateBonusNumber(number) {
-		if (typeof +number !== 'number' || isNaN(+number)) {
-			throw Error('[ERROR] 숫자를 입력해주세요.');
-		}
+	validateBonusNumber(numberStr) {
+		const number = numberValidation(numberStr);
+
 		if (number < 1 && number > 45) {
 			throw Error('[ERROR] 1부터 45 사이의 번호를 입력해주세요.');
 		}
@@ -151,7 +150,7 @@ class App {
 			throw Error('[ERROR] 당첨번호 6개에 없는 숫자를 입력해주세요.');
 		}
 
-		return +number;
+		this.#bonus_number = number;
 	}
 }
 
