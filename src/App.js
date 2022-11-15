@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { ERROR_MESSAGE, INPUT_MESSAGE } = require('./constants');
+const { ERROR_MESSAGE, INPUT_MESSAGE, PRINT_MESSAGE } = require('./constants');
 const Lotto = require('./Lotto');
 const { numberValidation } = require('./utils');
 
@@ -24,7 +24,7 @@ class App {
 
 	printPurchaseQuantity() {
 		const quantity = this.#payment / 1000;
-		Console.print(`\n${quantity}개를 구매했습니다.`);
+		Console.print(PRINT_MESSAGE.QUANTITY(quantity));
 
 		this.generateLottos(quantity);
 	}
@@ -38,7 +38,7 @@ class App {
 				const random_number = Random.pickUniqueNumbersInRange(1, 45, 6);
 				const sorted_random_number = random_number.sort((a, b) => a - b);
 				const lotto = new Lotto(sorted_random_number);
-				Console.print(`[${lotto.numbers.join(', ')}]`);
+				Console.print(PRINT_MESSAGE.LOTTO(lotto));
 				lottos.push(lotto);
 			});
 
@@ -91,11 +91,7 @@ class App {
 	}
 
 	printResult() {
-		const [place5, place4, place3, place2, place1] = this.#result;
-		const resultMessage = `3개 일치 (5,000원) - ${place5}개\n4개 일치 (50,000원) - ${place4}개\n5개 일치 (1,500,000원) - ${place3}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${place2}개\n6개 일치 (2,000,000,000원) - ${place1}개
-    `;
-
-		Console.print(resultMessage);
+		Console.print(PRINT_MESSAGE.RESULT(this.#result));
 
 		this.printProfitRate();
 	}
@@ -110,7 +106,7 @@ class App {
 
 		const profit = ((totalPrize / this.#payment) * 100).toFixed(1);
 
-		Console.print(`총 수익률은 ${profit}%입니다.`);
+		Console.print(PRINT_MESSAGE.PROFIT(profit));
 		this.close();
 	}
 
