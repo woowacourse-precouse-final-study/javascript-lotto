@@ -40,3 +40,41 @@
   - string to number
   - validation 
     - number
+
+
+## validation 재사용성
+
+< 구현목록 >
+- ✅ 유효한 숫자
+- ✅ 1~ 45 사이 -> lotto / utils
+- ✅ 중복된 숫자 여부 -> lotto / utils
+- 6자리 -> lotto 
+
+
+< lists >
+- payment : 
+  - 유효한 숫자 : 
+  - 1000원 이상
+  - 1000원 단위
+
+- lotto number
+  - 유효한 숫자
+  - 1~ 45 사이 -> lotto / utils
+  - 6자리 -> lotto 
+  - 중복된 숫자 여부 -> lotto / utils
+
+- winning number
+  - , 사이의 모든 공백제거 : 정규표현식 사용
+  - , 구분자로 split
+
+  - 유효한 숫자
+  - 1~ 45 사이 -> lotto / utils
+  - 6자리 -> lotto 
+  - 중복된 숫자 여부 -> lotto / utils
+
+- bonus number
+  - 유효한 숫자
+  - 1~ 45 사이
+  - 1자리
+  - winning number과 중복 숫자 여부
+
