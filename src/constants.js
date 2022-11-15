@@ -1,3 +1,9 @@
+const INPUT_MESSAGE = {
+	GET_PAYMENT: '구입금액을 입력해 주세요.\n',
+	GET_WINNING: '당첨 번호를 입력해 주세요.\n',
+	GET_BONUS: '보너스 번호를 입력해 주세요.\n',
+};
+
 const ERROR_MESSAGE = {
 	VALID_NUMBER: '[ERROR] 유효한 숫자를 입력해주세요.',
 	VALID_PAYMENT: {
@@ -16,4 +22,5 @@ const ERROR_MESSAGE = {
 
 module.exports = {
 	ERROR_MESSAGE,
+	INPUT_MESSAGE,
 };

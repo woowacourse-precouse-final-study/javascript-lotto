@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { ERROR_MESSAGE } = require('./constants');
+const { ERROR_MESSAGE, INPUT_MESSAGE } = require('./constants');
 const Lotto = require('./Lotto');
 const { numberValidation } = require('./utils');
 
@@ -15,7 +15,7 @@ class App {
 	}
 
 	getPayment() {
-		Console.readLine('구입금액을 입력해 주세요.\n', moneyStr => {
+		Console.readLine(INPUT_MESSAGE.GET_PAYMENT, moneyStr => {
 			this.validateAmount(moneyStr);
 
 			this.printPurchaseQuantity();
@@ -48,14 +48,14 @@ class App {
 	}
 
 	getWinningNumber() {
-		Console.readLine('\n당첨 번호를 입력해 주세요.\n', numbersStr => {
+		Console.readLine(INPUT_MESSAGE.GET_WINNING, numbersStr => {
 			this.validateWinningNumber(numbersStr);
 			this.getBonusNumber();
 		});
 	}
 
 	getBonusNumber() {
-		Console.readLine('\n보너스 번호를 입력해 주세요.\n', numberStr => {
+		Console.readLine(INPUT_MESSAGE.GET_BONUS, numberStr => {
 			this.#bonus_number = this.validateBonusNumber(numberStr);
 			this.generateResult();
 		});
