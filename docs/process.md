@@ -22,10 +22,10 @@
 
 - Lotto 
   - state : 
-    - numbers (로또 1장의 6자리 번호 : instance 생성시 인자로 넘어옴) -> private
-    - result
+    - ✅ numbers (로또 1장의 6자리 번호 : instance 생성시 인자로 넘어옴) -> private
+    - ✅ result
   - method
-    - 번호 유효성 체크 : validate(numbers)
+    - ✅ 번호 유효성 체크 : validate(numbers)
     - ✅ 번호 출력 : get(numbers)
     - ✅ 당첨내역 확인 : checkResult(numbers, winning)
 
@@ -35,12 +35,10 @@
 
 
 - utils
-  - console.readline
-  - 개행
-  - string to number
-  - validation 
-    - number
-
+  - ✅ validation 
+    - ✅ number
+    - ✅ duplicate
+    - ✅ range
 
 ## validation 재사용성
 
