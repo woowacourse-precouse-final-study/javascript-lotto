@@ -36,8 +36,7 @@ class App {
 			.fill(0)
 			.map(() => {
 				const random_number = Random.pickUniqueNumbersInRange(1, 45, 6);
-				const sorted_random_number = random_number.sort((a, b) => a - b);
-				const lotto = new Lotto(sorted_random_number);
+				const lotto = new Lotto(random_number);
 				Console.print(PRINT_MESSAGE.LOTTO(lotto));
 				lottos.push(lotto);
 			});
