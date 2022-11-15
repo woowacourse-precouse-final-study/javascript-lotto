@@ -48,7 +48,7 @@
 - ✅ 유효한 숫자
 - ✅ 1~ 45 사이 -> lotto / utils
 - ✅ 중복된 숫자 여부 -> lotto / utils
-- 6자리 -> lotto 
+- ✅ 6자리 -> lotto 
 
 
 < lists >
