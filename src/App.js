@@ -3,7 +3,7 @@ const Controller = require('./controller/Controller');
 class App {
   play() {
     const controller = new Controller();
-    controller.pay();
+    controller.getMoney();
   }
 }
 

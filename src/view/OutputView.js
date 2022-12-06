@@ -1,11 +1,9 @@
-const {
-  PRINT_MESSAGE: { QUANTITY },
-} = require('../constants');
+const { PRINT_MESSAGE } = require('../constants');
 const { Console } = require('@woowacourse/mission-utils');
 
 const OutputView = {
-  printPurchaseQuantity(purchaseQuantity) {
-    Console.print(QUANTITY(purchaseQuantity));
+  printLottoTickets(lottos) {
+    Console.print(PRINT_MESSAGE.LOTTO_TICKETS(lottos));
   },
 };
 

@@ -11,16 +11,16 @@ class Controller {
     };
   }
 
-  pay() {
+  getMoney() {
     this.view.input.readPayment(payment => {
       this.model.setPayment(payment);
-      this.purchase();
+      this.purchaseLotteryTickets();
     });
   }
 
-  purchase() {
-    const purchase_quantity = this.model.generatePurchaseQuantity();
-    this.view.output.printPurchaseQuantity(purchase_quantity);
+  purchaseLotteryTickets() {
+    const lottos = this.model.generateLottoTickets();
+    this.view.output.printLottoTickets(lottos);
   }
 }
 

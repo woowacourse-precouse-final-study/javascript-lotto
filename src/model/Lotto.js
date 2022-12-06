@@ -6,6 +6,15 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  sortAscending(numbers) {
+    return numbers.sort((a, b) => a - b);
+  }
+
+  getLottoNumbers() {
+    const sorted = this.sortAscending(this.#numbers);
+    return sorted;
+  }
+
   validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
