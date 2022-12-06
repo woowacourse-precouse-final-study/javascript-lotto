@@ -14,7 +14,13 @@ class Controller {
   pay() {
     this.view.input.readPayment(payment => {
       this.model.setPayment(payment);
+      this.purchase();
     });
+  }
+
+  purchase() {
+    const purchase_quantity = this.model.generatePurchaseQuantity();
+    this.view.output.printPurchaseQuantity(purchase_quantity);
   }
 }
 
