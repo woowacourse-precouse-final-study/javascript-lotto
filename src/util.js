@@ -4,11 +4,11 @@ const START_INCLUSIVE = 1,
   COUNT = 6;
 
 const throwError = (conditions, errorMsg) => {
-  if (conditions) throw new Error(errorMsg);
+  if (conditions) throw new Error(`[ERROR] ${errorMsg}`);
 };
 
 const getSortedSixRandomNumber = () => {
-  return Random.pickUniqueNumbersInRange(START_INCLUSIVE, END_INCLUSIVE, COUNT);
+  return Random.pickUniqueNumbersInRange(START_INCLUSIVE, END_INCLUSIVE, COUNT).sort((a, b) => a - b);
 };
 
 module.exports = { throwError, getSortedSixRandomNumber };

@@ -4,7 +4,8 @@ const LottoAmount = require('../Domain/LottoAmount');
 const { printUserLotto } = require('./OutputView');
 
 const INPUT_QUERY = Object.freeze({
-  lottoAmount: '구입금액을 입력해 주세요.'
+  lottoAmount: '구입금액을 입력해 주세요.\n',
+  lottoNumber: '\n당첨 번호를 입력해 주세요.\n',
 })
 
 const InputView = {
@@ -17,7 +18,9 @@ const InputView = {
   },
   
   readLottoNumber() {
-    
+    Console.readLine(INPUT_QUERY.lottoNumber, (numbers) => {
+      const lotto = new Lotto(numbers.split(','));
+    })
   },
 
   readBonusNumber() {
