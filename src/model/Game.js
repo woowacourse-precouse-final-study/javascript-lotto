@@ -4,9 +4,19 @@ const Lotto = require('../model/Lotto');
 class LotteryGame {
   #payment;
   #lottoTickets = [];
+  #winningNumber;
+  #bonusNumber;
 
   setPayment(payment) {
     this.#payment = payment;
+  }
+
+  setWinningNumber(winningNumber) {
+    this.#winningNumber = winningNumber;
+  }
+
+  setBonusNumber(bonusNumber) {
+    this.#bonusNumber = bonusNumber;
   }
 
   calculateQuantity() {
@@ -23,7 +33,7 @@ class LotteryGame {
         this.#lottoTickets.push(lottoTicket);
       });
 
-    return this.#lottoTickets.map(tickets => tickets.getLottoNumbers());
+    return this.#lottoTickets.map(ticket => ticket.getLottoNumbers());
   }
 }
 
