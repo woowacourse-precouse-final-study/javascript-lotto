@@ -1,5 +1,8 @@
 const { ERROR_MESSAGE } = require('./constants');
 const { checkInRange, checkDuplicates } = require('./utils');
+const {
+  LOTTO: { PRICE, LENGTH, RANGE },
+} = require('./constants');
 
 const numberValidation = stringInput => {
   if (isNaN(stringInput) || isNaN(parseInt(stringInput))) {
@@ -12,21 +15,21 @@ const numberValidation = stringInput => {
 const validatePayment = paymentStr => {
   const payment = numberValidation(paymentStr);
 
-  if (payment < 1000) {
+  if (payment < PRICE) {
     throw Error(ERROR_MESSAGE.VALID_PAYMENT.AMOUNT);
   }
-  if (payment % 1000 !== 0) {
+  if (payment % PRICE !== 0) {
     throw Error(ERROR_MESSAGE.VALID_PAYMENT.UNIT);
   }
 
   return payment;
 };
 
-const validateLottoNumber = (lottoNumbers) => {
-  if (lottoNumbers.length !== 6) {
+const validateLottoNumber = lottoNumbers => {
+  if (lottoNumbers.length !== LENGTH) {
     throw new Error(ERROR_MESSAGE.VALID_LOTTO.LENGTH);
   }
-  if (checkInRange(1, 45, lottoNumbers)) {
+  if (checkInRange(RANGE.MIN, RANGE.MAX, lottoNumbers)) {
     throw new Error(ERROR_MESSAGE.VALID_LOTTO.RANGE);
   }
   if (checkDuplicates(lottoNumbers)) {
@@ -48,7 +51,7 @@ const validateWinningNumber = winningNumberStr => {
 const validateBonusNumber = (bonusNumberStr, winningNumber) => {
   const bonus_number = numberValidation(bonusNumberStr);
 
-  if (bonus_number < 1 && bonus_number > 45) {
+  if (bonus_number < RANGE.MIN && bonus_number > RANGE.MAX) {
     throw Error(ERROR_MESSAGE.VALID_LOTTO.RANGE);
   }
 
