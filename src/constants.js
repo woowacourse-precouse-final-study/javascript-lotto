@@ -53,6 +53,11 @@ const LOTTO = {
     MIN: 1,
     MAX: 45,
   },
+  LENGTH: 6,
+  PROFIT_RATE: {
+    PERCENT: 100,
+    FIXED: 1,
+  },
 };
 
 const LOTTO_WINNER_PLACES = {

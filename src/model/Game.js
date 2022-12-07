@@ -2,6 +2,7 @@ const { Random } = require('@woowacourse/mission-utils');
 const Lotto = require('../model/Lotto');
 const { validatePayment, validateWinningNumber, validateBonusNumber } = require('../validation');
 const {
+  LOTTO: { PRICE, RANGE, LENGTH, PROFIT_RATE },
   LOTTO_WINNER_PLACES: { FIRST, SECOND, THIRD, FOURTH, FIFTH },
   LOTTO_PRIZE,
   LOTTO_WINNER_PLACES,
@@ -36,7 +37,7 @@ class LotteryGame {
   }
 
   calculateQuantity() {
-    return this.#payment / 1000;
+    return this.#payment / PRICE;
   }
 
   generateLottoTickets() {
@@ -44,7 +45,7 @@ class LotteryGame {
     Array(quantity)
       .fill(0)
       .map(_ => {
-        const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+        const numbers = Random.pickUniqueNumbersInRange(RANGE.MIN, RANGE.MAX, LENGTH);
         const lottoTicket = new Lotto(numbers);
         this.#lottoTickets.push(lottoTicket);
       });
@@ -55,7 +56,7 @@ class LotteryGame {
   generateResult() {
     this.#lottoTickets.map(ticket => {
       const result = ticket.checkLottoResult(this.#winningNumber, this.#bonusNumber);
-      if (result < 3) return;
+      if (result < FIFTH) return;
       this.#results[result] += 1;
     });
 
@@ -69,7 +70,7 @@ class LotteryGame {
       return acc + this.#results[cnt] * prize;
     }, 0);
 
-    const profit = ((totalPrize / this.#payment) * 100).toFixed(1);
+    const profit = ((totalPrize / this.#payment) * PROFIT_RATE.PERCENT).toFixed(PROFIT_RATE.FIXED);
     return profit;
   }
 }
