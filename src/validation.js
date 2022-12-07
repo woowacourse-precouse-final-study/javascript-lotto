@@ -22,20 +22,20 @@ const validatePayment = paymentStr => {
   return payment;
 };
 
-const validateLottoNumber = numbers => {
-  if (numbers.length !== 6) {
+const validateLottoNumber = (lottoNumbers) => {
+  if (lottoNumbers.length !== 6) {
     throw new Error(ERROR_MESSAGE.VALID_LOTTO.LENGTH);
   }
-  if (checkInRange(1, 45, numbers)) {
+  if (checkInRange(1, 45, lottoNumbers)) {
     throw new Error(ERROR_MESSAGE.VALID_LOTTO.RANGE);
   }
-  if (checkDuplicates(numbers)) {
+  if (checkDuplicates(lottoNumbers)) {
     throw new Error(ERROR_MESSAGE.VALID_LOTTO.DUPLICATE);
   }
 };
 
-const validateWinningNumber = numbersStr => {
-  const winning_number = numbersStr
+const validateWinningNumber = winningNumberStr => {
+  const winning_number = winningNumberStr
     .replace(/\s/gi, '')
     .split(',')
     .map(str => numberValidation(str));
@@ -45,16 +45,16 @@ const validateWinningNumber = numbersStr => {
   return winning_number;
 };
 
-const validateBonusNumber = numberStr => {
-  const bonus_number = numberValidation(numberStr);
+const validateBonusNumber = (bonusNumberStr, winningNumber) => {
+  const bonus_number = numberValidation(bonusNumberStr);
 
   if (bonus_number < 1 && bonus_number > 45) {
     throw Error(ERROR_MESSAGE.VALID_LOTTO.RANGE);
   }
 
-  // if (this.#winning_number.includes(number)) {
-  //   throw Error(ERROR_MESSAGE.VALID_BONUS.DUPLICATE);
-  // }
+  if (winningNumber.includes(bonus_number)) {
+    throw Error(ERROR_MESSAGE.VALID_BONUS.DUPLICATE);
+  }
 
   return bonus_number;
 };

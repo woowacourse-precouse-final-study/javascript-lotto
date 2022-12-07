@@ -1,5 +1,6 @@
 const { Random } = require('@woowacourse/mission-utils');
 const Lotto = require('../model/Lotto');
+const { validatePayment, validateWinningNumber, validateBonusNumber } = require('../validation');
 
 class LotteryGame {
   #payment;
@@ -8,15 +9,18 @@ class LotteryGame {
   #bonusNumber;
   #results;
 
-  setPayment(payment) {
+  setPayment(paymentStr) {
+    const payment = validatePayment(paymentStr);
     this.#payment = payment;
   }
 
-  setWinningNumber(winningNumber) {
+  setWinningNumber(winningNumberStr) {
+    const winningNumber = validateWinningNumber(winningNumberStr);
     this.#winningNumber = winningNumber;
   }
 
-  setBonusNumber(bonusNumber) {
+  setBonusNumber(bonusNumberStr) {
+    const bonusNumber = validateBonusNumber(bonusNumberStr, this.#winningNumber);
     this.#bonusNumber = bonusNumber;
   }
 

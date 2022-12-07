@@ -13,8 +13,8 @@ class Controller {
   }
 
   getMoney() {
-    this.view.input.readPayment(payment => {
-      this.model.setPayment(payment);
+    this.view.input.readPayment(paymentInput => {
+      this.model.setPayment(paymentInput);
       this.purchaseLotteryTickets();
     });
   }
@@ -26,15 +26,15 @@ class Controller {
   }
 
   drawWinningNumber() {
-    this.view.input.readWinningNumber(winningNumber => {
-      this.model.setWinningNumber(winningNumber);
+    this.view.input.readWinningNumber(winningNumberInput => {
+      this.model.setWinningNumber(winningNumberInput);
       this.drawBonusNumber();
     });
   }
 
   drawBonusNumber() {
-    this.view.input.readBonusNumber(bonusNumber => {
-      this.model.setBonusNumber(bonusNumber);
+    this.view.input.readBonusNumber(bonusNumberInput => {
+      this.model.setBonusNumber(bonusNumberInput);
       this.announceResult();
     });
   }
