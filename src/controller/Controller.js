@@ -35,7 +35,24 @@ class Controller {
   drawBonusNumber() {
     this.view.input.readBonusNumber(bonusNumber => {
       this.model.setBonusNumber(bonusNumber);
+      this.announceResult();
     });
+  }
+
+  announceResult() {
+    const results = this.model.generateResult();
+    this.view.output.printResult(results);
+    this.announceProfitRate();
+  }
+
+  announceProfitRate() {
+    const profit = this.model.generateProfitRate();
+    this.view.output.printProfitRate(profit);
+    this.end();
+  }
+
+  end() {
+    Console.close();
   }
 }
 

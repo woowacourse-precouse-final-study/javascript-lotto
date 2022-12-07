@@ -16,7 +16,7 @@ const PRINT_MESSAGE = {
   },
   RESULT(arr) {
     const [place5, place4, place3, place2, place1] = arr;
-    return `당첨 통계\n---\n3개 일치 (5,000원) - ${place5}개\n4개 일치 (50,000원) - ${place4}개\n5개 일치 (1,500,000원) - ${place3}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${place2}개\n6개 일치 (2,000,000,000원) - ${place1}개`;
+    return `\n당첨 통계\n---\n3개 일치 (5,000원) - ${place5}개\n4개 일치 (50,000원) - ${place4}개\n5개 일치 (1,500,000원) - ${place3}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${place2}개\n6개 일치 (2,000,000,000원) - ${place1}개`;
   },
   PROFIT(profit) {
     return `\n총 수익률은 ${profit}%입니다.`;
