@@ -63,14 +63,12 @@ class LotteryGame {
   }
 
   generateProfitRate() {
-    let totalPrize = 0;
-
-    Object.keys(LOTTO_WINNER_PLACES).map(place => {
-      const correctNumberCount = LOTTO_WINNER_PLACES[place];
+    const totalPrize = Object.entries(LOTTO_WINNER_PLACES).reduce((acc, currVal) => {
+      const [place, cnt] = currVal;
       const prize = LOTTO_PRIZE[place];
-      totalPrize += this.#results[correctNumberCount] * prize;
-    });
-    
+      return acc + this.#results[cnt] * prize;
+    }, 0);
+
     const profit = ((totalPrize / this.#payment) * 100).toFixed(1);
     return profit;
   }

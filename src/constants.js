@@ -15,13 +15,11 @@ const PRINT_MESSAGE = {
     return this.LOTTO_QUANTITY(lottos.length) + '\n' + lottos.map(lotto => this.LOTTO_TICKET(lotto)).join('\n');
   },
   RESULT(results) {
-    const resultStr = Object.keys(LOTTO_WINNER_PLACES)
-      .map(place => {
-        const correctNumberCount = LOTTO_WINNER_PLACES[place];
-        const correctNumberStr =
-          correctNumberCount === 'bonus' ? '5개 일치, 보너스 볼 일치' : `${correctNumberCount}개 일치`;
+    const resultStr = Object.entries(LOTTO_WINNER_PLACES)
+      .map(([place, cnt]) => {
+        const correctNumberStr = cnt === 'bonus' ? '5개 일치, 보너스 볼 일치' : `${cnt}개 일치`;
         const prize = LOTTO_PRIZE[place].toLocaleString();
-        const count = results[correctNumberCount];
+        const count = results[cnt];
         return `${correctNumberStr} (${prize}원) - ${count}개`;
       })
       .join('\n');

@@ -22,20 +22,13 @@ class Lotto {
   }
 
   checkLottoResult(winning_number, bonus_number) {
-    let cnt = 0;
-    let isBonus = false;
-
-    this.#numbers.map(num => {
-      if (winning_number.includes(num)) {
-        cnt += 1;
-      }
-    });
+    const cnt = this.#numbers.filter(num => winning_number.includes(num)).length;
 
     if (cnt === 5 && this.#numbers.includes(bonus_number)) {
-      isBonus = true;
+      return 'bonus';
     }
 
-    return isBonus ? 'bonus' : cnt;
+    return cnt;
   }
 }
 
