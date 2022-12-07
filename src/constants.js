@@ -14,9 +14,19 @@ const PRINT_MESSAGE = {
   LOTTO_TICKETS(lottos) {
     return this.LOTTO_QUANTITY(lottos.length) + '\n' + lottos.map(lotto => this.LOTTO_TICKET(lotto)).join('\n');
   },
-  RESULT(arr) {
-    const [place5, place4, place3, place2, place1] = arr;
-    return `\n당첨 통계\n---\n3개 일치 (5,000원) - ${place5}개\n4개 일치 (50,000원) - ${place4}개\n5개 일치 (1,500,000원) - ${place3}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${place2}개\n6개 일치 (2,000,000,000원) - ${place1}개`;
+  RESULT(results) {
+    const resultStr = Object.keys(LOTTO_WINNER_PLACES)
+      .map(place => {
+        const correctNumberCount = LOTTO_WINNER_PLACES[place];
+        const correctNumberStr =
+          correctNumberCount === 'bonus' ? '5개 일치, 보너스 볼 일치' : `${correctNumberCount}개 일치`;
+        const prize = LOTTO_PRIZE[place].toLocaleString();
+        const count = results[correctNumberCount];
+        return `${correctNumberStr} (${prize}원) - ${count}개`;
+      })
+      .join('\n');
+
+    return '\n당첨 통계\n---\n' + resultStr;
   },
   PROFIT(profit) {
     return `\n총 수익률은 ${profit}%입니다.`;
@@ -39,8 +49,35 @@ const ERROR_MESSAGE = {
   },
 };
 
+const LOTTO = {
+  PRICE: 1000,
+  RANGE: {
+    MIN: 1,
+    MAX: 45,
+  },
+};
+
+const LOTTO_WINNER_PLACES = {
+  FIFTH: 3,
+  FOURTH: 4,
+  THIRD: 5,
+  SECOND: 'bonus',
+  FIRST: 6,
+};
+
+const LOTTO_PRIZE = {
+  FIFTH: 5000,
+  FOURTH: 50000,
+  THIRD: 1500000,
+  SECOND: 30000000,
+  FIRST: 2000000000,
+};
+
 module.exports = {
   ERROR_MESSAGE,
   INPUT_MESSAGE,
   PRINT_MESSAGE,
+  LOTTO,
+  LOTTO_PRIZE,
+  LOTTO_WINNER_PLACES,
 };

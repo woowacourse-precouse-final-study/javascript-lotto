@@ -1,13 +1,24 @@
 const { Random } = require('@woowacourse/mission-utils');
 const Lotto = require('../model/Lotto');
 const { validatePayment, validateWinningNumber, validateBonusNumber } = require('../validation');
+const {
+  LOTTO_WINNER_PLACES: { FIRST, SECOND, THIRD, FOURTH, FIFTH },
+  LOTTO_PRIZE,
+  LOTTO_WINNER_PLACES,
+} = require('../constants');
 
 class LotteryGame {
   #payment;
   #lottoTickets = [];
   #winningNumber;
   #bonusNumber;
-  #results;
+  #results = {
+    [FIFTH]: 0,
+    [FOURTH]: 0,
+    [THIRD]: 0,
+    [SECOND]: 0,
+    [FIRST]: 0,
+  };
 
   setPayment(paymentStr) {
     const payment = validatePayment(paymentStr);
@@ -42,43 +53,24 @@ class LotteryGame {
   }
 
   generateResult() {
-    const answerCountArr = this.#lottoTickets.map(ticket =>
-      ticket.checkLottoResult(this.#winningNumber, this.#bonusNumber),
-    );
-    const results = [0, 0, 0, 0, 0];
-
-    answerCountArr.map(cnt => {
-      switch (cnt) {
-        case 3:
-          results[0] += 1;
-          break;
-        case 4:
-          results[1] += 1;
-          break;
-        case 5:
-          results[2] += 1;
-          break;
-        case 'bonus':
-          results[3] += 1;
-          break;
-        case 6:
-          results[4] += 1;
-          break;
-      }
+    this.#lottoTickets.map(ticket => {
+      const result = ticket.checkLottoResult(this.#winningNumber, this.#bonusNumber);
+      if (result < 3) return;
+      this.#results[result] += 1;
     });
 
-    this.#results = results;
     return this.#results;
   }
 
   generateProfitRate() {
-    const prize = [5000, 50000, 1500000, 3000000, 2000000000];
     let totalPrize = 0;
 
-    for (let i = 0; i < this.#results.length; i++) {
-      totalPrize += this.#results[i] * prize[i];
-    }
-
+    Object.keys(LOTTO_WINNER_PLACES).map(place => {
+      const correctNumberCount = LOTTO_WINNER_PLACES[place];
+      const prize = LOTTO_PRIZE[place];
+      totalPrize += this.#results[correctNumberCount] * prize;
+    });
+    
     const profit = ((totalPrize / this.#payment) * 100).toFixed(1);
     return profit;
   }
