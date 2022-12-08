@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 
 const PRINT_MESSAGE = Object.freeze({
-  purchaseAmount: (lottoCount) => `${lottoCount}개를 구매했습니다.`,
+  purchaseAmount: (lottoCount) => `\n${lottoCount}개를 구매했습니다.`,
   winning_statistics: "\n당첨 통계\n---",
   profit: (profit) => `총 수익률은 ${profit}%입니다.`,
 });
@@ -18,7 +18,7 @@ const OutputView = {
   printUserLotto(lottoCount, totalUserLotto) {
     Console.print(PRINT_MESSAGE.purchaseAmount(lottoCount)),
       totalUserLotto.map((eachUserLotto) => {
-        Console.print(`[${eachUserLotto}]`);
+        Console.print(`[${eachUserLotto.join(', ')}]`);
       });
   },
 

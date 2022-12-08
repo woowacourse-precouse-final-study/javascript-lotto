@@ -1,6 +1,6 @@
 const {throwError, getSortedSixRandomNumber} = require("../util");
 const THOUSAND_WON = 1000;
-const PRIZE_MONEY = [2000000000, 30000000, 1500000,50000, 5000];
+const PRIZE_MONEY = [5000, 50000, 1500000, 30000000, 2000000000];
 const ERROR = Object.freeze({
   minimum_amount: 1000,
   not_number: '1000원 단위의 숫자를 입력해주세요.',
