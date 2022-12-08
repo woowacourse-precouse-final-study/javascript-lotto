@@ -21,7 +21,7 @@ class App {
   getMoney() {
     MissionUtils.Console.readLine("구입금액을 입력해 주세요.\n", (money) => {
       this.purchaseAmount = parseInt(money);
-      const numberPattern = /[^0-9]/g;
+      const numberPattern = /^[0-9]*$/
       if (numberPattern.test(this.purchaseAmount)) {
         throw new Error("[ERROR] 숫자만 입력하세요.");
       }
@@ -71,7 +71,7 @@ class App {
       (number) => {
         const bonusNum = parseInt(number);
         const validation = new Validation(bonusNum);
-        validation.isVaildBounsNumber(bonusNum);
+        validation.isValidBounsNumber(bonusNum);
         this.bonusNumber = bonusNum;
         if (this.winningList.includes(this.bonusNumber)) {
           throw new Error(

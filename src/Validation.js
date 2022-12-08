@@ -6,7 +6,7 @@ class Validation {
 
   
   isValidBounsNumber(number) {
-    const numberPattern = /[^0-9]/g;
+    const numberPattern = /^[0-9]*$/;
     if (numberPattern.test(number)) {
       throw new Error("[ERROR] 숫자만 입력하세요.");
     }

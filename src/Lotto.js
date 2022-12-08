@@ -12,8 +12,8 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }  
-    const numPattern = /[^0-9]/g;	
-    if (!numPattern.test(numbers)) {
+    const numPattern =/^[0-9]*$/;	
+    if (numPattern.test(numbers)) {
       throw new Error("[ERROR] 숫자만 입력하세요.");
     }
     const uniqueNums = new Set(numbers);
