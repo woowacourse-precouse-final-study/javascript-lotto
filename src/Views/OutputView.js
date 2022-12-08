@@ -27,8 +27,10 @@ const OutputView = {
     Console.print(LOTTO_PRINT_MENTION.result_header);
   },
 
-  printLottoCountResult(index, count) {
-    Console.print(LOTTO_PRINT_MENTION.lotto_reward[index] +` ${count}개`);
+  printLottoCountResult(lottoResult) {
+    lottoResult.forEach((count, index) => {
+      Console.print(LOTTO_PRINT_MENTION.lotto_reward[index] +` ${count}개`);
+    })
   }
 };
 

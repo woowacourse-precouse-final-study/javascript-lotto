@@ -5,9 +5,11 @@ const {
 const { 
   compareLottoNumber,
   calcLottoResultMoney,
-  calcLottoResultCount,
 } = require('./Controllers/CalcLotto');
-const { printResultHeader } = require('./Views/OutputView');
+const { 
+  printResultHeader,
+  printLottoCountResult,
+} = require('./Views/OutputView');
 class Lotto {
   #numbers;
 
@@ -23,7 +25,7 @@ class Lotto {
 
   lottoResultCalc() {
     printResultHeader();
-    calcLottoResultCount(this.lottoResult);
+    printLottoCountResult(this.lottoResult);
     return calcLottoResultMoney(this.lottoResult);
   }
 

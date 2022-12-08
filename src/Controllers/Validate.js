@@ -10,7 +10,7 @@ const Validate = {
 
   isValidateInputMoney(money) {
     if (money % 1000 !== 0) {
-      Console.close()
+      Console.close();
       throw new Error(LOTTO_ERROR_MENTION.money_size_thousand);
     }
   },
@@ -27,12 +27,14 @@ const Validate = {
   isDuplicateNumber(numbers) {
     const duplicateSet = new Set(numbers);
     if (numbers.length !== duplicateSet.size) {
+      Console.close();
       throw new Error(LOTTO_ERROR_MENTION.duplicate_lotto_number);
     }
   },
 
   isNumberLengthCheck(numbers) {
     if (numbers.length !== 6) {
+      Console.close();
       throw new Error(LOTTO_ERROR_MENTION.lotto_number_length);
     }
   },
