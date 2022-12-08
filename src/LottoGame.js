@@ -6,6 +6,9 @@ const OutputView = require("./UI/OutputView");
 
 class LottoGame {
   #prizeCount;
+  #lottoAmount;
+  #lotto;
+  #bonus;
 
   constructor() {
     this.#prizeCount = {
@@ -19,10 +22,10 @@ class LottoGame {
 
   handleLottoAmount() {
     InputView.readLottoAmount((amount) => {
-      this.lottoAmount = new LottoAmount(amount);
+      this.#lottoAmount = new LottoAmount(amount);
       OutputView.printUserLotto(
-        this.lottoAmount.getLottoCount(),
-        this.lottoAmount.TotalUserLotto
+        this.#lottoAmount.getLottoCount(),
+        this.#lottoAmount.TotalUserLotto
       );
       this.handleLottoNumber();
     });
@@ -30,24 +33,24 @@ class LottoGame {
 
   handleLottoNumber() {
     InputView.readLottoNumber((number) => {
-      this.lotto = new Lotto(number);
-      this.lotto.compareUserAndWinningNumber(this.lottoAmount.TotalUserLotto);
-      this.lotto.countPrizeCount(this.#prizeCount);
+      this.#lotto = new Lotto(number);
+      this.#lotto.compareUserAndWinningNumber(this.#lottoAmount.TotalUserLotto);
+      this.#lotto.countPrizeCount(this.#prizeCount);
       this.handleBonusNumber(number);
     });
   }
 
   handleBonusNumber(winningLotto) {
     InputView.readBonusNumber((bonus) => {
-      this.bonus = new Bonus(bonus, winningLotto);
-      this.bonus.findFiveMatchLotto(this.lottoAmount.TotalUserLotto);
-      this.bonus.checkBonusInFiveMatchLotto(this.#prizeCount);
+      this.#bonus = new Bonus(bonus, winningLotto);
+      this.#bonus.findFiveMatchLotto(this.#lottoAmount.TotalUserLotto);
+      this.#bonus.checkBonusInFiveMatchLotto(this.#prizeCount);
       this.generateResult();
     });
   }
   generateResult() {
     OutputView.printResult(this.#prizeCount);
-    OutputView.printProfit(this.lottoAmount.calculateProfit(this.#prizeCount));
+    OutputView.printProfit(this.#lottoAmount.calculateProfit(this.#prizeCount));
   }
 }
 
