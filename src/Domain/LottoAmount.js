@@ -1,4 +1,6 @@
 const {throwError, getSortedSixRandomNumber} = require("../util");
+const THOUSAND_WON = 1000;
+const PRIZE_MONEY = [2000000000, 30000000, 1500000,50000, 5000];
 const ERROR = Object.freeze({
   minimum_amount: 1000,
   not_number: '1000원 단위의 숫자를 입력해주세요.',
@@ -12,16 +14,17 @@ class LottoAmount {
   constructor(amount) {
     this.validate(amount);
     this.#lottoAmount = amount;
+    this.totalUserLotto = this.publishLotto();
   }
 
   validate(amount) {
     throwError(isNaN(amount), ERROR.not_number);
     throwError(amount < ERROR.minimum_amount, ERROR.not_upper_one_thousand);
-    throwError(amount % ERROR.minimum_amount !== 0, ERROR.not_thousand_unit)
+    throwError(amount % THOUSAND_WON !== 0, ERROR.not_thousand_unit)
   }
 
   getLottoCount() {
-    return this.#lottoAmount / ERROR.minimum_amount;
+    return this.#lottoAmount / THOUSAND_WON;
   }
 
   publishLotto() {
@@ -33,6 +36,18 @@ class LottoAmount {
     }
 
     return totalUserLotto;
+  }
+
+  get TotalUserLotto() {
+    return this.totalUserLotto;
+  }
+
+  calculateProfit(prizeCount) {
+    const outputMoney = Object.values(prizeCount).reduce(
+      (accumulator, currentValue, index) => currentValue * PRIZE_MONEY[index] + accumulator,
+      0
+    );
+    return ((outputMoney / this.#lottoAmount) * 100).toFixed(1);
   }
 }
 

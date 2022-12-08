@@ -1,10 +1,10 @@
-const { throwError } = require("../util");
+const { throwError, findIntersection, isOutOfRange } = require("../util");
 const ERROR = Object.freeze({
-  not_six_digits: '로또 번호는 6개여야 합니다.',
-  duplicate: '로또 번호에 중복된 숫자가 있습니다.',
-  out_of_range: '로또 번호는 1부터 45까지의 숫자여야 합니다.',
-  not_number: '로또 번호는 숫자여야 합니다.'
-})
+  not_six_digits: "로또 번호는 6개여야 합니다.",
+  duplicate: "로또 번호에 중복된 숫자가 있습니다.",
+  out_of_range: "로또 번호는 1부터 45까지의 숫자여야 합니다.",
+  not_number: "로또 번호는 숫자여야 합니다.",
+});
 
 class Lotto {
   #numbers;
@@ -17,8 +17,30 @@ class Lotto {
   validate(numbers) {
     throwError(numbers.length !== 6, ERROR.not_six_digits);
     throwError(new Set(numbers).size !== 6, ERROR.duplicate);
-    throwError(numbers.some((number) => isNaN(number)), ERROR.not_number)
-    throwError(numbers.some((number) => number < 1 || number > 45), ERROR.out_of_range);
+    throwError(numbers.some((number) => isNaN(number)), ERROR.not_number);
+    throwError(numbers.some((number) => isOutOfRange(number)), ERROR.out_of_range);
+  }
+
+  compareUserAndWinningNumber(totalUserLotto) {
+    this.matchedLottoNumber = totalUserLotto.map((eachUserLotto) => 
+        findIntersection(new Set(eachUserLotto), new Set(this.#numbers))
+    );
+  }
+
+  countPrizeCount(prizeCount) {
+    this.matchedLottoNumber.forEach((number) => {
+      switch (number) {
+        case 6:
+          prizeCount.first += 1;
+          break;
+        case 4:
+          prizeCount.fourth += 1;
+          break;
+        case 3:
+          prizeCount.fifth += 1;
+          break;
+      }
+    });
   }
 }
 

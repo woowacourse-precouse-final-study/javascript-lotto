@@ -1,29 +1,28 @@
 const { Console } = require('@woowacourse/mission-utils');
-const Lotto = require('../Domain/Lotto');
-const LottoAmount = require('../Domain/LottoAmount');
-const { printUserLotto } = require('./OutputView');
 
 const INPUT_QUERY = Object.freeze({
-  lottoAmount: '구입금액을 입력해 주세요.\n',
-  lottoNumber: '\n당첨 번호를 입력해 주세요.\n',
+  lotto_amount: '구입금액을 입력해 주세요.\n',
+  lotto_number: '\n당첨 번호를 입력해 주세요.\n',
+  bonus_number: '\n보너스 번호를 입력해 주세요.\n',
 })
 
 const InputView = {
-  readLottoAmount() { 
-    Console.readLine(INPUT_QUERY.lottoAmount, (amount) => {
-      const lottoAmount = new LottoAmount(amount);
-      printUserLotto(lottoAmount.getLottoCount(), lottoAmount.publishLotto());
-      this.readLottoNumber();
+  readLottoAmount(lottoAmountCallback) { 
+    Console.readLine(INPUT_QUERY.lotto_amount, (amount) => {
+      lottoAmountCallback(amount);
     })
   },
   
-  readLottoNumber() {
-    Console.readLine(INPUT_QUERY.lottoNumber, (numbers) => {
-      const lotto = new Lotto(numbers.split(','));
+  readLottoNumber(lottoNumberCallback) {
+    Console.readLine(INPUT_QUERY.lotto_number, (numbers) => {
+      lottoNumberCallback(numbers.split(',').map((number)=> Number(number)))
     })
   },
 
-  readBonusNumber() {
+  readBonusNumber(bonusNumberCallback) {
+    Console.readLine(INPUT_QUERY.bonus_number, (bonus) => {
+      bonusNumberCallback(Number(bonus))
+    })
   },
 }
 

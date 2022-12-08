@@ -1,8 +1,9 @@
-const InputView = require("./UI/InputView");
+const LottoGame = require("./LottoGame");
 
 class App {
   play() {
-    InputView.readLottoAmount();
+    const lottoGame = new LottoGame();
+    lottoGame.handleLottoAmount();
   }
 }
 
