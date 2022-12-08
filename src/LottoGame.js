@@ -22,7 +22,7 @@ class LottoGame {
       this.lottoAmount = new LottoAmount(amount);
       OutputView.printUserLotto(
         this.lottoAmount.getLottoCount(),
-        this.lottoAmount.totalUserLotto
+        this.lottoAmount.TotalUserLotto
       );
       this.handleLottoNumber();
     });
@@ -31,7 +31,7 @@ class LottoGame {
   handleLottoNumber() {
     InputView.readLottoNumber((number) => {
       this.lotto = new Lotto(number);
-      this.lotto.compareUserAndWinningNumber(this.lottoAmount.totalUserLotto);
+      this.lotto.compareUserAndWinningNumber(this.lottoAmount.TotalUserLotto);
       this.lotto.countPrizeCount(this.#prizeCount);
       this.handleBonusNumber(number);
     });
