@@ -21,17 +21,29 @@ class App {
     this.totalLottoMoney = 0;
   };
 
-  play() {
+  LottoSetting() {
     this.lottoTicketCount = readBuyLottoMoney();
     printLottoTicketCount(this.lottoTicketCount);
     this.lottoInfo = LottoRandomNumberGenerator(this.lottoTicketCount);
     printRandomLottoNumber(this.lottoInfo);
+  }
+
+  LottoJackpotCheck() {
     this.jackpotNumber = readJackpotNumber();
     this.BonusNumber = readBonusNumber();
     const lottoCheck = new Lotto(this.jackpotNumber);
     lottoCheck.checkJackpotLotto(this.lottoInfo, this.BonusNumber);
     this.totalLottoMoney = lottoCheck.lottoResultCalc();
+  }
+
+  LottoResultPrint() {
     printLottoRevenuePercent(this.totalLottoMoney, this.lottoTicketCount);
+  }
+
+  play() {
+    this.LottoSetting();
+    this.LottoJackpotCheck();
+    this.LottoResultPrint();
     Console.close();
   }
 }
