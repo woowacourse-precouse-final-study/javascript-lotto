@@ -22,6 +22,11 @@ const findIntersection = (setA, setB) => {
 
 const isOutOfRange = (number) => {
   return number < 1 || number > 45;
-}
+};
 
-module.exports = { throwError, getSortedSixRandomNumber, findIntersection, isOutOfRange};
+module.exports = {
+  throwError,
+  getSortedSixRandomNumber,
+  findIntersection,
+  isOutOfRange,
+};

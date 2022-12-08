@@ -22,8 +22,8 @@ class Lotto {
   }
 
   compareUserAndWinningNumber(totalUserLotto) {
-    this.matchedLottoNumber = totalUserLotto.map((eachUserLotto) => 
-        findIntersection(new Set(eachUserLotto), new Set(this.#numbers))
+    this.matchedLottoNumber = totalUserLotto.map((eachUserLotto) =>
+      findIntersection(new Set(eachUserLotto), new Set(this.#numbers))
     );
   }
 
