@@ -1,5 +1,5 @@
 const {Console} = require("@woowacourse/mission-utils");
-const {INPUT_MESSAGE : {buyLottoMessage,winningNumbersMessage,bonusNumberMessage}}= require('../src/Constant')
+const {INPUT_MESSAGE : {buyLottoMessage, winningNumbersMessage, bonusNumberMessage}} = require('../Constant')
 
 /** 사용자로부터 입력을 받는 역할을 한다 */
 
@@ -12,7 +12,7 @@ const InputView = {
 
   readWinningNumbers(winningNumbers) {
     Console.readLine(winningNumbersMessage, (numbers) => {
-      winningNumbers(numbers.split(',').map((num) => parseInt(num,10)))
+      winningNumbers(numbers.split(',').map((num) => parseInt(num,10)).sort((a,b) => a-b))
     })
   },
 
