@@ -1,5 +1,5 @@
 const {Random} = require("@woowacourse/mission-utils");
-const {RANDOM_RANGE_NUM : {minInclusive,maxInclusive,numberCount}} = require('../src/Constant');
+const {RANDOM_RANGE_NUM : {minInclusive,maxInclusive,numberCount}} = require('./Constant');
 
 const LottoRandomNumberGenerator = {
   generate() {

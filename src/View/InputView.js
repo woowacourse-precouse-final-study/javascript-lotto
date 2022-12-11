@@ -1,5 +1,5 @@
 const {Console} = require("@woowacourse/mission-utils");
-const {INPUT_MESSAGE : {buyLottoMessage, winningNumbersMessage, bonusNumberMessage}} = require('../Constant')
+const {INPUT_MESSAGE : {buyLottoMessage, winningNumbersMessage, bonusNumberMessage}} = require('../util/Constant')
 
 /** 사용자로부터 입력을 받는 역할을 한다 */
 

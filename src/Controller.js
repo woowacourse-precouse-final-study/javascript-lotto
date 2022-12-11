@@ -1,8 +1,8 @@
 const InputView = require('../src/View/InputView')
 const OutputView = require('../src/View/OutputView')
-const Lotto = require('../src/Lotto')
+const Lotto = require('./Model/Lotto')
 const {Console} = require("@woowacourse/mission-utils");
-const {generate} = require('../src/LottoRandomNumberGenerator')
+const {generate} = require('./util/LottoRandomNumberGenerator')
 
 class Controller {
   constructor() {
@@ -56,7 +56,13 @@ class Controller {
 
   printResult() {
     this.lottoResult = this.lotto.findMatchCount(this.winningLotto,this.bonusNum);
-    Console.print(this.lottoResult)
+    OutputView.resultMap(this.lottoResult)
+    this.printRateOfReturn()
+  }
+
+  printRateOfReturn() {
+    OutputView.rateOfreturn(this.lotto.getProfit(this.lottoQuantity))
+    Console.close()
   }
 
 }
