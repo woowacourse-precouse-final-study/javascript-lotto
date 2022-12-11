@@ -1,6 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { LOTTO_REWARD, LOTTO_PRINT_MENTION } = require("../constant");
-const { printLottoCountResult } = require('../Views/OutputView');
 
 const CalcLotto = {
   calcLottoResultMoney(lottoResult) {
@@ -13,12 +12,6 @@ const CalcLotto = {
       
   calcRevenuePercent(lottoRevenue, lottoTicketCount) {
     return lottoRevenue / (lottoTicketCount * 1000) * 100;
-  },
-      
-  calcLottoResultCount(lottoResult) {
-    lottoResult.forEach((count, index) => {
-      Console.print(LOTTO_PRINT_MENTION.lotto_reward[index] +` ${count}개`);
-    })
   },
       
   compareLottoNumber(lottoNumber, jackpotNumber) {

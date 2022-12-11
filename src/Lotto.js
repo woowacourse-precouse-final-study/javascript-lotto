@@ -10,6 +10,7 @@ const {
   printResultHeader,
   printLottoCountResult,
 } = require('./Views/OutputView');
+
 class Lotto {
   #numbers;
 
