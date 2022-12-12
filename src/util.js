@@ -1,8 +1,8 @@
 const { Random } = require("@woowacourse/mission-utils");
-const START_INCLUSIVE = 1,
-  END_INCLUSIVE = 45,
-  COUNT = 6,
-  ERROR = "[ERROR]";
+const START_INCLUSIVE = 1;
+const END_INCLUSIVE = 45;
+const COUNT = 6;
+const ERROR = "[ERROR]";
 
 const throwError = (conditions, errorMsg) => {
   if (conditions) throw new Error(`${ERROR} ${errorMsg}`);

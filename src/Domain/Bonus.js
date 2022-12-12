@@ -7,35 +7,23 @@ const ERROR = Object.freeze({
 
 class Bonus {
   #bonus;
-  #winningLotto;
 
-  constructor(bonus, winningLotto) {
-    this.#winningLotto = winningLotto;
+  constructor(bonus) {
     this.validate(bonus);
     this.#bonus = bonus;
   }
 
   validate(bonus) {
     throwError(isNaN(bonus), ERROR.not_number);
-    throwError(this.#winningLotto.includes(bonus), ERROR.duplicate);
     throwError(isOutOfRange(bonus), ERROR.out_of_range);
   }
 
-  findFiveMatchLotto(totalUserLotto) {
-    this.fiveMatchLotto = [];
-    totalUserLotto.map((eachUserLotto) => {
-      if (findIntersection(
-          new Set(eachUserLotto),
-          new Set(this.#winningLotto)
-          ) === 5
-      ) {
-        this.fiveMatchLotto.push(eachUserLotto);
-      }
-    });
+  checkBonusInLotto (winningLotto) {
+    throwError(winningLotto.includes(this.#bonus), ERROR.duplicate);
   }
 
-  checkBonusInFiveMatchLotto(prizeCount) {
-    this.fiveMatchLotto.forEach((eachUserLotto) => {
+  checkBonusInFiveMatchLotto(prizeCount, fiveMatchLotto) {
+    fiveMatchLotto.forEach((eachUserLotto) => {
       if (eachUserLotto.includes(this.#bonus)) {
         return (prizeCount.second += 1);
       }

@@ -8,7 +8,7 @@ const ERROR = Object.freeze({
   not_thousand_unit: "1000원 단위로 입력해주세요",
 });
 
-class LottoAmount {
+class UserLotto {
   #lottoAmount;
 
   constructor(amount) {
@@ -38,7 +38,7 @@ class LottoAmount {
     return totalUserLotto;
   }
 
-  get TotalUserLotto() {
+  get userLotto() {
     return this.totalUserLotto;
   }
 
@@ -52,4 +52,4 @@ class LottoAmount {
   }
 }
 
-module.exports = LottoAmount;
+module.exports = UserLotto;

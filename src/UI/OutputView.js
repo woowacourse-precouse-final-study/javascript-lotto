@@ -16,10 +16,10 @@ const RANKING = {
 
 const OutputView = {
   printUserLotto(lottoCount, totalUserLotto) {
-    Console.print(PRINT_MESSAGE.purchaseAmount(lottoCount)),
-      totalUserLotto.map((eachUserLotto) => {
-        Console.print(`[${eachUserLotto.join(", ")}]`);
-      });
+    Console.print(PRINT_MESSAGE.purchaseAmount(lottoCount));
+    totalUserLotto.map((eachUserLotto) => {
+      Console.print(`[${eachUserLotto.join(", ")}]`);
+    });
   },
 
   printResult(prizeCount) {

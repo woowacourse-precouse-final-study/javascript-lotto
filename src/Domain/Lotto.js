@@ -12,19 +12,37 @@ class Lotto {
   constructor(numbers) {
     this.validate(numbers);
     this.#numbers = numbers;
+    this.fiveMatchLotto = [];
+    this.matchedLottoNumber = [];
   }
 
   validate(numbers) {
     throwError(numbers.length !== 6, ERROR.not_six_digits);
     throwError(new Set(numbers).size !== 6, ERROR.duplicate);
-    throwError(numbers.some((number) => isNaN(number)), ERROR.not_number);
-    throwError(numbers.some((number) => isOutOfRange(number)), ERROR.out_of_range);
+    throwError(
+      numbers.some((number) => isNaN(number)),
+      ERROR.not_number
+    );
+    throwError(
+      numbers.some((number) => isOutOfRange(number)),
+      ERROR.out_of_range
+    );
   }
 
   compareUserAndWinningNumber(totalUserLotto) {
-    this.matchedLottoNumber = totalUserLotto.map((eachUserLotto) =>
-      findIntersection(new Set(eachUserLotto), new Set(this.#numbers))
-    );
+    let intersection;
+    totalUserLotto.forEach((eachUserLotto) => {
+      intersection = findIntersection(
+        new Set(eachUserLotto),
+        new Set(this.#numbers)
+      );
+      if (intersection === 5) return this.fiveMatchLotto.push(eachUserLotto);
+      return this.matchedLottoNumber.push(intersection)
+    });
+  }
+
+  getFiveMatchLotto () {
+    return this.fiveMatchLotto;
   }
 
   countPrizeCount(prizeCount) {
